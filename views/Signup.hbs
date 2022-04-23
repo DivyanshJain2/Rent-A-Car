@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('images/loginback.jpg');
+
+  background-repeat: no-repeat;
+ background-position: center;
+  background-image: url('./Images/login-img.jpg');
+  background-size: 200vw 200vh;
+}
+
+.centdiv{
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.486);
+  border-radius: 5%;
+  position: absolute;
+  left: 50%;
+  padding: 20px;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#wlcm{
+	text-align: center;
+  color: aliceblue;
+}
+label{
+  color: aliceblue;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+
+}
+
+.row img{
+  height: 50px;
+  width: 50px;
+}
+
+#sgn {
+  background-color: #4b220a;
+  color: aliceblue;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+#lgn {
+  text-decoration: none;
+  text-align:center;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+
+</style>
+<script>  
+  function validateform()  
+  {  
+  var x=document.myform.email.value;  
+  var atposition=x.indexOf("@");  
+  var dotposition=x.lastIndexOf(".");  
+  if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+    document.getElementById("err").textContent="Please enter a valid Email."; 
+    return false;  
+    } 
+    
+    else if(document.myform.fname.value.length<3)
+    {
+      document.getElementById("err").textContent="First Name must be atleast 3 characters long.";
+      return false;
+    }
+    else if(document.myform.lname.value.length<3)
+    {
+      document.getElementById("err").textContent="Last Name must be atleast 3 characters long.";
+      return false;
+    }
+  else if(document.myform.psw.value.length<8)
+    {
+      document.getElementById("err").textContent="Password must be atleast 8 characters long.";
+      return false;
+    }
+  else if(document.myform.psw.value!=document.myform.cpsw.value)
+    {
+      document.getElementById("err").textContent="Passwords do not match.";
+      return false;
+    }
+    else
+		{
+	
+	fetch('/api/users/register',{
+	method:'POST',
+	headers:{
+	'Content-Type': 'application/json'
+	},
+	body: JSON.stringify({"firstName":document.myform.fname.value,"lastName":document.myform.lname.value,"email":x,"password":document.myform.psw.value})
+	})
+	.then(res=>res.json())
+	.then(data=>{
+    console.info(data);
+		if(data.status==201)
+		{
+			location.href = "./login.html";
+		}
+		else
+		{	
+			alert(data.message);
+		}});
+		}
+
+  }  
+  </script>  
+</head>
+<body>
+
+   
+
+	<div class="centdiv">
+    <div class="row">
+      <img src="./Images/logo.png">
+      <h1 id="wlcm">Rent-A-Car | Sign Up</h1>
+    </div>
+    <form name="myform"   method="post">  
+      <div class="container">
+        <label calss="labl" for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+       
+        <label calss="labl" for="fname"><b>First Name</b></label>
+        <input type="text" placeholder="Enter firstname" name="fname" required>
+        <br>
+        <br>
+        <label calss="labl" for="lname"><b>Last Name</b></label>
+        <input type="text" placeholder="Enter lastname" name="lname" required>
+        <br>
+        
+        <label calss="labl" calss="labl" for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <br>
+        <label calss="labl" for="cpsw"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Confirm Password" name="cpsw" required>
+        <br>
+        <p id="err" style="color: #f44336;"></p>
+        <input type="button" value="SignUp" id="sgn" onclick="validateform();" />
+      </div>
+    </form>
+    <div class="row">
+      <a id="lgn"  href= "login.html" >Already a User ?</a>
+    </div>
+	
+	  </div>
+	
+	
+
+
+</body>
+</html>

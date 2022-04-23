@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #ebab976c;
+}
+
+html ::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+html ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+html ::-webkit-scrollbar-thumb {
+    background: #fe5b3d;
+    border-radius: 5rem;
+}
+
+:root{
+    --main-color: #fe5b3d;
+    --second-color:#ffac38;
+    --text-color:#444;
+    --gradinet:linear-gradient(#fe5b3d,#ffac38);
+}
+
+.navbar-text {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eeeff1;
+    padding: 15px 70px;
+}
+
+.logo {
+    display: flex;
+}
+
+.logo-img {
+    width: 40px;
+}
+
+.logo-text {
+    justify-content: center;
+    padding: 10px;
+    color:#eeeff1;
+}
+
+.navbar-text {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #617db4;
+    padding: 15px 70px;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: rgb(238, 228, 228);
+    font-weight: 500;
+}
+
+.navbar a::after {
+    content: " ";
+    width: 0;
+    height: 3px;
+    background: linear-gradient(#fe5b3d, #ffac38);
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    transition: 0.5s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.navbar-btn button{
+    padding: 10px 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    width: relative;
+    border-radius: 0.5rem;
+}
+
+.navbar-btn .sign-up{
+    background: #474fa0;
+    color:#fff;
+    border-radius: 0.5rem;
+}
+
+.navbar-btn .sign-up:hover{
+    background: #fe5b3d;
+}
+
+.sub-navbar{
+    display: none;
+}
+
+.sub-navbar a{
+    color: rgb(238, 228, 228);
+}
+
+.sub-navbar li{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.navbar li:hover .sub-navbar{
+    display: block;
+    position: fixed;
+    font-size: 1rem;
+    background: #617db4;
+    font-weight: 500;
+}
+
+.banner {
+    height: 400px;
+    margin-bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(31, 14, 76, 0.9), rgba(5, 1, 30, 0.9)), url(./Images/banner.jpg);
+    background-attachment: fixed;
+}
+
+.banner-text{
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.heading {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.heading-text {
+    color: #ffac38;
+    font-size: 40px;
+    padding: 10px;
+}
+
+.about-img {
+    margin-top: 10px;
+}
+
+#p1 {
+    font-weight: 500;
+    font-size: 20px;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.meet {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.team {
+    font-size: 30px;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.members {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.team-member {
+    display: flex;
+    
+}
+
+.team-content {
+    text-align: center;
+}
+
+.team-content:hover{
+    background: #747691;
+    color: #eeeff1;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.car-heading {
+    text-align: center;
+    text-decoration: underline;
+    color: #f7550f;
+    
+}
+
+.cars {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.car-justification {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rent-car:hover{
+    background-color: rgba(17, 64, 219, 0.87);
+}
+
+.booking {
+    margin: 30px;
+}
+
+.booking-info {
+    display:flex;
+}
+
+.booking-box {
+    margin-left: 30px;
+}
+
+.date-info {
+    padding-top: 20px;
+    width: 200px;
+}
+
+.date {
+    margin: 0 30px 30px 30px;
+}
+
+.home{
+    display: flex;
+    align-items: left; 
+    justify-content: center;
+    height: 95vh;
+    margin: 1%;
+    margin-right: 30%;
+}
+
+.text{
+    display:flex;
+    flex-direction: column;
+}
+
+.text h1{
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+}
+
+.text span{
+    color:var(--main-color);
+}
+
+.text p{
+    margin: 00.5rem 0 1rem;
+}
+
+.app-stores p{
+    cursor: pointer;
+    opacity: 0.5;
+    background-size: 100% 100%;
+} 
+
+.form-container form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10%;
+    background: #fff;
+    padding:20px;
+    border-radius: 0.5rem;
+}
+
+.input-box {
+    flex: 1 1 7rem ;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box span{
+    font-weight:500;
+}
+
+.input-box input{
+    padding:7px;
+    outline:none;
+    border:none;
+    background:#eeeff1;
+    border: radius 0.5rem;
+    font-size:1rem;
+}
+
+.form-container form .btn{
+        flex: 1 1 7rem;
+        padding :10px 34px;
+        border:none;
+        border-radius: 0.5rem;
+        background: #f7550f;
+        color: #fff;
+        font-size: 1rem ;
+        font-weight:500;
+}
+
+.form-container form  .btn:hover {
+    background: var(--main-color);
+    color:#f7550f;
+    border:1px solid #f7550f;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.rent-car{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.rent-car button{
+    padding: 10px;
+}
+
+.car-justification{
+    align-items: center;
+    flex-direction: column;
+}
+
+.car-justification:hover{
+    color: #eeeff1;
+}
+
+.text{
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.address{
+    background-color:#cea593;
+}
+
+.contactBox
+{
+    text-align: center;
+    margin:auto;
+}

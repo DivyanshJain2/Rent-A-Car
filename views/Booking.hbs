@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent-A-Car</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    function fetc()
+    {
+        const params = new URLSearchParams(window.location.search);
+    for(const [key,value] of params)
+    {
+            console.info(key);
+            if(key=="amount")
+            {
+                document.getElementById("amount").value=value;
+           
+            }
+            if(key=="name")
+            {
+                document.getElementById("name").value=value;
+           
+            }
+            
+    
+    }
+    }
+
+    function calculate(){
+        var p = document.getElementById("city").value;
+        var d = document.getElementById("drop").value;
+        var pd = document.getElementById("pickup-date").value;
+        var r = document.getElementById("return").value;
+        var s = document.getElementById("special").value;
+        var c = document.getElementById("amount").value;
+        var u = document.getElementById("upi").value;
+       
+        const[year,month,day]=r.split('-');
+        const[year1,month1,day1]=pd.split('-');
+        var days = parseInt(day)-parseInt(day1);
+        document.getElementById("amount").value=parseInt(document.getElementById("amount").value)*parseInt(days);
+        var c = document.getElementById("amount").value;
+        fetch('/api/book',{
+        method:"POST",
+        headers:{
+        'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify({"pickup_date":pd,"return_date":r,"pickup_location":p,"drop_location":d,"special_request":s,"Amount":c,"upiid":u})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.info(data);
+            if(data.status==201)
+            {
+                alert("added");
+            }
+            else
+            {
+                alert("failed");
+            }
+        })
+
+    }
+    
+</script>
+<body onload = "fetc()">
+     <!-- Navbar Start -->
+     <div class="navbar-text">
+        <div class="logo">
+        <img  class="logo-img" src="./Images/logo.png" alt="company logo" height="50">
+        <h2 class="logo-text">Rent-A-Car</h2>
+        </div>
+        
+        <ul class="navbar">
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="">Cars</a>
+                <div class="sub-navbar">
+                    <ul>
+                        <li><a href="cars.html">Hatchback</a></li>
+                        <li><a href="Sedan.html">Sedan</a></li>
+                        <li><a href="SUV.html">SUV</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="services.html">Service</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li><a href="Booking.html">Bookings</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+
+        <div class="navbar-btn">
+            <button class="Login"><a href="login.html">Login</a></button>
+            <button class="Sign-Up"><a href="Signup.html">Sign Up</a></button>
+        </div>
+    </div>
+    <!-- Navbar End -->
+    
+    <div class="banner">
+        <h1 class="banner-text">Booking Details</h1>
+    </div>
+
+    <div class="booking" style="display: flex; justify-content: space-between;">
+                <div class="booking-main">
+                    <h2 class="booking-heading">Booking Detail</h2>
+                    <div class="booking-info">
+                        <div class="date-info" >
+                            <select id="city" style="height: 50px; width: 150px;">
+                                <option selected>Pickup Location</option>
+                                <option value="1">Ahmedabad</option>
+                                <option value="2">Gandhinagar</option>
+                                <option value="3">Pune</option>
+                                <option value="1">Mumbai</option>
+                                <option value="2">Udaipur</option>
+                                <option value="3">Jainpur</option>
+                            </select>
+                        </div>
+                        <div class="date-info" >
+                            <select id="drop" class="booking-box" style="height: 50px; width: 150px;">
+                                <option selected>Drop Location</option>
+                                <option value="1">Ahmedabad</option>
+                                <option value="2">Gandhinagar</option>
+                                <option value="3">Pune</option>
+                                <option value="1">Mumbai</option>
+                                <option value="2">Udaipur</option>
+                                <option value="3">Jainpur</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="booking-info">
+                        <div class="date-info" >
+                            <div>
+                                <label>Pick-Up Date</label><br>
+                                <input type="date" id="pickup-date" />
+                            </div>
+                        </div>
+                        <div class="date-info" >
+                            <div class="date">
+                                <label>Return Date</label><br>
+                                <input type="date" id="return" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" cols="55" placeholder="Special Request" id="special"></textarea>
+                    </div><br>
+                    <center>
+                    <button style="padding: 10px;" onclick="calculate()">Book Now</button>
+                    </center>
+                </div><br> 
+                
+                <div class="booking-info">
+                    <div class="date-info" style="margin-right: 320px; padding: 10px; border: solid black 2px; border-radius: 3px;">
+                        <h2 class="booking-heading">Payment Detail</h2><br>
+                        <form>
+                        <span>Amount: 
+                        <input type="text" id="amount" value="" readonly > 
+                        <input type="hidden" id="name" value="" readonly > 
+                        </span><br><br>
+                        <span>Mode of Payment: </span><br>
+                        <input type="radio"  value="online" name="payment">Online<br>
+                        <input type="text" id = "upi" placeholder="id@upi"><br><br>
+                        <input type="radio" value="cash on delivery" name="payment">Payment while pickup
+                        <br><br>
+                        <center>
+                        <input type="button" value="pay" onclick="calculate()" style="padding: 10px; width: 100px">
+                        </center>
+                        </form>
+                    </div>
+                </div>
+            </div>   
+    </div>
+</body>
+</html>
